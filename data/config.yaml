@@ -1,0 +1,9 @@
+---
+prefix: "!"
+owner: 160619908063952907
+channel: 165310621049552897
+database: '../robowilliams.db'
+migrations: 'data/migrations'
+uptime: 3
+timeout: 180
+chain_length: 10

@@ -1,0 +1,22 @@
+version: "3.4"
+
+services:
+  robowilliams:
+    build:
+      context: .    
+      dockerfile: Dockerfile
+    secrets:
+      - robowilliams_client
+      - robowilliams_token     
+    environment:
+      - CLIENT_FILE=/run/secrets/robowilliams_client
+      - TOKEN_FILE=/run/secrets/robowilliams_token
+    restart: unless-stopped      
+    volumes:
+      - .:/usr/src/robowilliams  
+
+secrets:
+  robowilliams_client:
+    file: ./docker/secrets/robowilliams_client
+  robowilliams_token:
+    file: ./docker/secrets/robowilliams_token

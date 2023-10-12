@@ -6,4 +6,4 @@ COPY . .
 
 RUN bundle install
 
-CMD ["/usr/src/robowilliams/run.sh"]
+CMD ["./run.sh"]

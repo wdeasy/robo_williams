@@ -1,9 +1,8 @@
 FROM ruby:2.7.1
-
-WORKDIR /usr/src/robowilliams
-
-COPY . .
-
+RUN mkdir /app
+WORKDIR /app
+COPY Gemfile /app/Gemfile
+COPY Gemfile.lock /app/Gemfile.lock
 RUN bundle install
-
-CMD ["./run.sh"]
+COPY . /app
+CMD ["/app/run.sh"]

@@ -1,4 +1,3 @@
-require 'active_support/time'
 require 'date'
 require 'time'
 
@@ -11,13 +10,15 @@ module Bot
 
     $heartbeat_in_progress = true
 
-    if !BOT.connected?
-      if $disc_count > 1
-        Bot.log "Bot has been disconnected for #{$disc_count} heartbeats. Restarting."
-        exit 0
-      end
+    if !BOT.connected? && $disc_count > 2
+      Bot.log "Bot has been disconnected for #{$disc_count} heartbeats. Restarting."
+      exit 0
+    end
 
+    if !BOT.connected?      
       Bot.log "Heartbeat skipped. Bot is not connected. #{$disc_count}"
+      $disc_count+=1
+      $heartbeat_in_progress = false      
       return
     end
 

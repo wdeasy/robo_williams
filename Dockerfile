@@ -1,9 +1,8 @@
 FROM ruby:2.7.1
 RUN mkdir /app
 WORKDIR /app
-COPY Gemfile /app/Gemfile
-COPY Gemfile.lock /app/Gemfile.lock
+ADD Gemfile* /app/
 RUN bundle install
-COPY . /app
+ADD . /app
 RUN ["chmod", "+x", "/app/run.sh"]
 CMD ["/app/run.sh"]

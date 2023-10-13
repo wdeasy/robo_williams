@@ -60,6 +60,9 @@ module Bot
   #bot rate limiting
   BOT.bucket :limit, limit: 60, time_span: 60, delay: 1
 
+  #logging
+  $stdout.sync = true
+
   #run
   BOT.run
 end

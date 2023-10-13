@@ -1,4 +1,3 @@
-require 'active_support/time'
 require 'date'
 require 'time'
 

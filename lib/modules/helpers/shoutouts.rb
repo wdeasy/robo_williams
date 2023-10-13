@@ -1,3 +1,5 @@
+require 'date'
+
 module Bot
   def self.shoutout_check
     shoutouts = DB[:shoutouts]

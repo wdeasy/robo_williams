@@ -7,7 +7,7 @@ module Bot
       command(:pirate, description: "Ye be typin like this") do |event, *args|
         msg = TalkLikeAPirate.translate(args.join(" ").strip)
 
-        Bot.send_response(event, msg, event.command.name)
+        Bot.send_response(event, msg)
       end
     end
   end

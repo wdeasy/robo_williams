@@ -5,7 +5,7 @@ module Bot
       command(:pashto, description: "[type like this in Pashto]") do |event, *args|
         msg = "[#{args.join(" ").strip} in Pashto]"
 
-        Bot.send_response(event, msg, event.command.name)
+        Bot.send_response(event, msg)
       end
     end
   end

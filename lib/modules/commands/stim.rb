@@ -5,7 +5,7 @@ module Bot
       command(:stim, description: "TYPE ߷ LIKE ߷ THIS") do |event, *args|
         msg = args.map(&:upcase).join(" \u{7F7} ").strip
 
-        Bot.send_response(event, msg, event.command.name)
+        Bot.send_response(event, msg)
       end
     end
   end

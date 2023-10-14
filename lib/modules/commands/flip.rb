@@ -7,7 +7,7 @@ module Bot
       command(:flip, description: "sᴉɥʇ əʞᴉl ədʎʇ") do |event, *args|
         msg = args.join(" ").strip.flip
 
-        Bot.send_response(event, msg, event.command.name)
+        Bot.send_response(event, msg)
       end
     end
   end

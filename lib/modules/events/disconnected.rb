@@ -3,13 +3,13 @@ module Bot
     module Disconnected
       extend Discordrb::EventContainer
       disconnected do |event|
-        Bot.log "==> DISCONNECTED EVENT <=="
+        Bot.log "==> DISCONNECTED <=="
 
         sleep CONFIG.timeout
-        unless BOT.connected?
-          Bot.log "Still disconnected after #{CONFIG.timeout} seconds. Restarting."
-          exit 0
-        end
+        next if BOT.connected?
+
+        Bot.log "Still disconnected after #{CONFIG.timeout} seconds. Restarting."
+        exit 0
       end
     end
   end

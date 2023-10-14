@@ -4,10 +4,9 @@ module Bot
       extend Discordrb::Commands::CommandContainer
       command(:quit, help_available: false) do |event, *args|
         Bot.log "#{event.author.username}: #{event.content}"
-        break unless event.user.id == CONFIG.owner
-        unless event.message.channel.pm?
-          event.message.delete
-        end
+        next unless event.user.id == CONFIG.owner
+
+        event.message.delete unless event.message.channel.pm?
 
         exit 1
       end

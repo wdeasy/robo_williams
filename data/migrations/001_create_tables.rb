@@ -5,7 +5,7 @@ Sequel.migration do
     create_table(:shoutouts) do
       primary_key :id
       String :name, null: false
-      Date :shoutout, null: false
+      Date :day, null: false
       String :discord
     end
 
@@ -15,7 +15,6 @@ Sequel.migration do
       String :text
       String :file
       String :emoji
-      DateTime :time, null: false
     end
   end
 end

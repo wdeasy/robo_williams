@@ -10,7 +10,7 @@ module Bot
 
     $heartbeat_in_progress = true
 
-    if !BOT.connected? && $disc_count > 2
+    if $disc_count > 2
       Bot.log "Bot has been disconnected for #{$disc_count} heartbeats. Restarting."
       exit 0
     end

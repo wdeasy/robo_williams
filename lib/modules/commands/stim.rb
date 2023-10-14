@@ -3,23 +3,9 @@ module Bot
     module Stim
       extend Discordrb::Commands::CommandContainer
       command(:stim, description: "TYPE ߷ LIKE ߷ THIS") do |event, *args|
-        words = ''
-        args.each do |arg|
-          words += "#{arg.upcase} \u{7F7} "
-        end
-        msg = words.chomp(" \u{7F7} ")
+        msg = args.map(&:upcase).join(" \u{7F7} ").strip
 
-        begin
-          Bot.log "#{event.author.username}: #{event.content}"
-          unless event.message.channel.pm?
-            event.message.delete
-          end
-          event.channel.split_send(msg)
-        rescue Exception => msg
-          Bot.log "Error with the stim command."
-          Bot.log msg
-        end
-        return nil
+        Bot.send_response(event, msg, event.command.name)
       end
     end
   end

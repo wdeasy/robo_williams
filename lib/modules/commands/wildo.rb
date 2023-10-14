@@ -113,12 +113,7 @@ module Bot
               when "l"
                 str += "🇱"
               when "m"
-                case rand(1..2)
-                when 1
-                  str += "Ⓜ️"
-                when 2
-                  str += "♏"
-                end
+                str += ["Ⓜ️","♏"].sample
               when "n"
                 str += "♑️"
               when "o"
@@ -140,12 +135,7 @@ module Bot
               when "w"
                 str += "🇼"
               when "x"
-                case rand(1..2)
-                when 1
-                  str += "✖️"
-                when 2
-                  str += "❎"
-                end
+                str += ["✖️","❎"].sample
               when "y"
                 str += "🇾"
               when "z"
@@ -175,21 +165,9 @@ module Bot
               when '*'
                 word += "*⃣"
               when "!"
-                case rand(1..3)
-                when 1
-                  str += "❗"
-                when 2
-                  str += "❕"
-                when 3
-                  str += "⚠️"
-                end
+                str += ["❗","❕","⚠️"].sample
               when "?"
-                case rand(1..2)
-                when 1
-                  str += "❓"
-                when 2
-                  str += "❔"
-                end
+                str += ["❓","❔"].sample                
               when " "
                 str += "   "
               else
@@ -212,17 +190,7 @@ module Bot
 
         msg = words.strip
 
-        begin
-          Bot.log "#{event.author.username}: #{event.content}"
-          unless event.message.channel.pm?
-            event.message.delete
-          end
-          event.channel.split_send(msg)
-        rescue Exception => msg
-          Bot.log "Error with the wildo command."
-          Bot.log msg
-        end
-        return nil
+        Bot.send_response(event, msg, event.command.name)
       end
     end
   end

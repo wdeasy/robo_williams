@@ -2,7 +2,7 @@ require 'date'
 
 module Bot
   def self.thursday_check
-    return if Date.today.strftime("%A") != "Thursday" && Date.today.day != 20
+    return unless Date.today.strftime("%A") == "Thursday" && Date.today.day == 20
     
     begin
       Bot.send_file(CONFIG.channel, File.open("data/images/thursday20.jpeg",'r'))

@@ -5,13 +5,13 @@ require 'yaml'
 
 module Bot
   unless File.exists? ENV['CLIENT_FILE']
-    Bot.log "Discord Client ID missing. Exiting."
-    exit 1
+    puts "Discord Client ID missing. Exiting."
+    exit
   end
 
   unless File.exists? ENV['TOKEN_FILE']
-    Bot.log "Discord Token missing. Exiting."
-    exit 1
+    puts "Discord Token missing. Exiting."
+    exit
   end
 
   #bot config
@@ -28,17 +28,11 @@ module Bot
   DB = Sequel.sqlite
   Sequel::Migrator.run(DB, CONFIG.migrations)
 
-  #garbage collection
-  $last_gc = Date.today
-
   #reconnect counter (times bot has reconnected)
   $recount = 0
 
   #disconnect counter (how long bot has been disconnected)
   $disc_count = 0
-
-  #start time
-  $start_time = Time.now
 
   #bot helpers
   Dir['lib/modules/helpers/*.rb'].each { |mod| load mod }
@@ -62,6 +56,13 @@ module Bot
 
   #logging
   $stdout.sync = true
+  $stderr.sync = true
+
+  #Docker stop handling
+  Signal.trap('TERM') do
+    Bot.log 'Received SIGTERM. Shutting down.'
+    BOT.stop
+  end
 
   #run
   BOT.run

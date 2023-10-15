@@ -10,11 +10,6 @@ module Bot
 
     $heartbeat_in_progress = true
 
-    if $disc_count > 2
-      Bot.log "Bot has been disconnected for #{$disc_count} heartbeats. Restarting."
-      exit 0
-    end
-
     if !BOT.connected?      
       Bot.log "Heartbeat skipped. Bot is not connected. #{$disc_count}"
       $disc_count+=1
@@ -34,20 +29,6 @@ module Bot
       Bot.shoutout_check
     end
 
-    if Date.today > $last_gc
-      $last_gc = Date.today
-      Bot.log "Starting Garbage Collection."
-      gc_start = Time.now
-      GC.start
-      Bot.log "Finished Garbage Collection. (#{Time.now - gc_start}sec)"
-    end
-
-    if ((Time.now - $start_time).to_i / (24 * 60 * 60)) >= CONFIG.uptime
-      Bot.log "==> Restarting Bot!! #{Time.now} <=="
-      exit 0
-    end
-
     $heartbeat_in_progress = false
-
   end
 end

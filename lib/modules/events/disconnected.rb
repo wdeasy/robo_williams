@@ -8,8 +8,7 @@ module Bot
         sleep CONFIG.timeout
         next if BOT.connected?
 
-        Bot.log "Still disconnected after #{CONFIG.timeout} seconds. Restarting."
-        exit 0
+        Bot.log "Still disconnected after #{CONFIG.timeout} seconds."
       end
     end
   end

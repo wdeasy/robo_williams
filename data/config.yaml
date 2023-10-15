@@ -6,4 +6,3 @@ database: '../robowilliams.db'
 migrations: 'data/migrations'
 uptime: 3
 timeout: 180
-chain_length: 10

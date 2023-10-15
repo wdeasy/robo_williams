@@ -3,9 +3,7 @@ module Bot
     module Stim
       extend Discordrb::Commands::CommandContainer
       command(:stim, description: "TYPE ߷ LIKE ߷ THIS") do |event, *args|
-        msg = args.map(&:upcase).join(" \u{7F7} ").strip
-
-        Bot.send_response(event, msg)
+        Bot.post_response(event, args.map(&:upcase).join(" \u{7F7} ").strip)
       end
     end
   end

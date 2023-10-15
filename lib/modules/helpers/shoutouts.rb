@@ -6,14 +6,8 @@ module Bot
     shoutouts.each do |shoutout|
       next unless shoutout[:day].month == Date.today.month && shoutout[:day].day == Date.today.day
 
-      begin
-        msg = "LETS GIVE A QUICK SHOUT OUT TO #{shoutout[:discord].nil? ? shoutout[:name] : shoutout[:discord]}"
-        Bot.log msg
-        BOT.channel(CONFIG.channel).split_send("\@here #{msg}")
-      rescue Exception => msg
-        Bot.log "Error posting shoutout."
-        Bot.log msg
-      end
+      name = shoutout[:discord].nil? ? shoutout[:name] : shoutout[:discord]
+      Bot.post_message("\@here LETS GIVE A QUICK SHOUT OUT TO #{name}")
     end
   end
 end

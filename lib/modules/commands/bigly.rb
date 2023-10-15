@@ -108,7 +108,7 @@ module Bot
 
         msg = words.strip
 
-        Bot.send_response(event, msg)
+        Bot.post_response(event, msg)
       end
     end
   end

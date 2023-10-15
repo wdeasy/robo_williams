@@ -3,9 +3,7 @@ module Bot
     module Pashto
       extend Discordrb::Commands::CommandContainer
       command(:pashto, description: "[type like this in Pashto]") do |event, *args|
-        msg = "[#{args.join(" ").strip} in Pashto]"
-
-        Bot.send_response(event, msg)
+        Bot.post_response(event, "[#{args.join(" ").strip} in Pashto]")
       end
     end
   end

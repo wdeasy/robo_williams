@@ -1,9 +1,11 @@
 source 'https://rubygems.org' do
-  gem 'discordrb'#, git: 'https://github.com/meew0/discordrb.git'
-  gem 'zalgo'
   gem 'aesthetic'
+  gem 'discordrb'
   gem 'flippy'
-  gem 'talk_like_a_pirate'
+  gem 'leetspeak'
   gem 'sequel'
   gem 'sqlite3'
+  gem 'talk_like_a_pirate'
+  gem 'vocaloo'
+  gem 'zalgo'
 end

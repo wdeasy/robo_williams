@@ -92,7 +92,7 @@ module Bot
             when '*'
               word += "*⃣"
             else
-              word += a.to_s.ascii_only? ? "**#{a.upcase}**" : "#{a}"
+              word += "**#{a}**"
             end
             word += " "
           end

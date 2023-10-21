@@ -28,9 +28,6 @@ module Bot
   DB = Sequel.sqlite
   Sequel::Migrator.run(DB, CONFIG.migrations)
 
-  #reconnect counter (times bot has reconnected)
-  $recount = 0
-
   #bot helpers
   Dir['lib/modules/helpers/*.rb'].each { |mod| load mod }
 

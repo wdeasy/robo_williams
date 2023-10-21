@@ -7,16 +7,19 @@ module Bot
       heartbeat do |event|
         next unless BOT.connected?
 
+        @heartbeat_in_progress = true
+
         begin
           Timeout.timeout(CONFIG.timeout){
             Bot.loop
           }
         rescue Timeout::Error
           Bot.log "Heartbeat did not finish in #{CONFIG.timeout} seconds."
-          $heartbeat_in_progress = false
         rescue RuntimeError => e
           Bot.log_exception(e)    
         end
+
+        @heartbeat_in_progress = false
       end
     end
   end

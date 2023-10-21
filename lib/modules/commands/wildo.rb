@@ -171,7 +171,7 @@ module Bot
               when " "
                 str += "   "
               else
-                word += arg[i].to_s.ascii_only? ? "**#{arg[i].upcase}**" : "#{arg[i]}"
+                word += "**#{arg[i]}**"
               end
             end
             i = i + buffer.length

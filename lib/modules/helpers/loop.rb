@@ -3,15 +3,11 @@ require 'time'
 
 module Bot
   def self.loop
-    if $heartbeat_in_progress == true
-      Bot.log "Previous hearbeat not finished."
-      return 
-    end
 
-    $heartbeat_in_progress = true
+    @last_motd = Date.today unless @last_motd
 
-    if Date.today > $last_motd
-      $last_motd = Date.today
+    if Date.today > @last_motd
+      @last_motd = Date.today
 
       #thursday the 20th
       Bot.thursday_check
@@ -20,6 +16,5 @@ module Bot
       Bot.shoutout_check
     end
 
-    $heartbeat_in_progress = false
   end
 end

@@ -3,11 +3,11 @@ module Bot
     module Message
       extend Discordrb::EventContainer
       message do |event|
-        regex = nil
+
+        @messages = DB[:messages].order(Sequel.char_length(:regex).distinct.desc) unless @messages
 
         matches = []
-        messages = DB[:messages].order(Sequel.char_length(:regex).distinct.desc)
-        messages.each do |msg|
+        @messages.each do |msg|
           matches.push(msg) if event.content.downcase.match(Regexp.new(msg[:regex]))
         end
 
@@ -37,7 +37,12 @@ module Bot
 
         unless match[:emoji].nil?
           begin
-            msg.nil? ? event.react(match[:emoji]) : msg.react(match[:emoji])
+            unless msg.nil?
+              msg.react(match[:emoji])
+              next
+            end
+
+            event.react(match[:emoji]) 
           rescue Exception => e
             Bot.log_exception(e)
           end

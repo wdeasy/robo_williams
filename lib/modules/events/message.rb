@@ -19,30 +19,27 @@ module Bot
 
         msg = nil
 
-        if !match[:file].nil?
+        unless match[:file].nil?
           begin
             msg = event.send_file(File.open("data/images/#{match[:file]}",'r'))
           rescue Exception => e
-            Bot.log "Error sending file."
-            Bot.log e
+            Bot.log_exception(e)
           end
         end
 
-        if !match[:text].nil?
+        unless match[:text].nil?
           begin
             msg = event.respond(match[:text])
           rescue Exception => e
-            Bot.log "Error sending message."
-            Bot.log e
+            Bot.log_exception(e)
           end
         end
 
-        if !match[:emoji].nil?
+        unless match[:emoji].nil?
           begin
             msg.nil? ? event.react(match[:emoji]) : msg.react(match[:emoji])
           rescue Exception => e
-            Bot.log "Error adding emoji."
-            Bot.log e
+            Bot.log_exception(e)
           end
         end
 

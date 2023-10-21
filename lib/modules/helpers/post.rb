@@ -6,7 +6,7 @@ module Bot
       event.channel.split_send(msg)
     rescue Exception => e
       Bot.log "Error with the #{event.command.name} command."
-      Bot.log e
+      Bot.log_exception(e)      
     end
   end
 
@@ -15,8 +15,7 @@ module Bot
       Bot.log "Posting #{msg}"
       BOT.channel(CONFIG.channel).split_send(msg)
     rescue Exception => e
-      Bot.log "Error posting message."
-      Bot.log e
+      Bot.log_exception(e)
     end
   end
 
@@ -25,8 +24,7 @@ module Bot
       Bot.log "Posting #{file}"
       BOT.channel(CONFIG.channel).send_file(File.open(file,'r'))
     rescue Exception => e
-      Bot.log "Error posting file."
-      Bot.log e
+      Bot.log_exception(e)
     end
   end
 end

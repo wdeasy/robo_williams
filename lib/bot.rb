@@ -31,9 +31,6 @@ module Bot
   #reconnect counter (times bot has reconnected)
   $recount = 0
 
-  #disconnect counter (how long bot has been disconnected)
-  $disc_count = 0
-
   #bot helpers
   Dir['lib/modules/helpers/*.rb'].each { |mod| load mod }
 

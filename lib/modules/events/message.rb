@@ -1,10 +1,10 @@
 module Bot
   module DiscordEvents
     module Message
+      @messages = DB[:messages].order(Sequel.char_length(:regex).distinct.desc)
+
       extend Discordrb::EventContainer
       message do |event|
-
-        @messages = DB[:messages].order(Sequel.char_length(:regex).distinct.desc) unless @messages
 
         matches = []
         @messages.each do |msg|

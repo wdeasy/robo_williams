@@ -3,9 +3,11 @@ require 'timeout'
 module Bot
   module DiscordEvents
     module Heartbeat
+      @heartbeat_in_progress = false
+
       extend Discordrb::EventContainer
       heartbeat do |event|
-        next unless BOT.connected?
+        next unless BOT.connected? && @heartbeat_in_progress == false
 
         @heartbeat_in_progress = true
 

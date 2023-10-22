@@ -2,9 +2,9 @@ require 'date'
 require 'time'
 
 module Bot
-  def self.loop
+  @last_motd = Date.today
 
-    @last_motd = Date.today unless @last_motd
+  def self.loop
 
     if Date.today > @last_motd
       @last_motd = Date.today

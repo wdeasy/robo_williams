@@ -4,10 +4,10 @@ require 'time'
 module Bot
   module DiscordEvents
     module Ready
+      @recount = 0
+
       extend Discordrb::EventContainer
       ready do |event|
-
-        @recount = 0 unless @recount 
         @recount+=1
 
         Bot.log "I've powered up, get my program set. (#{@recount})"

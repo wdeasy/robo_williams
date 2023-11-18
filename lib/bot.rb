@@ -17,11 +17,16 @@ module Bot
   #bot config
   CONFIG = OpenStruct.new YAML.load_file 'data/config.yaml'
 
+  options = {
+    client_id: IO.read(ENV['CLIENT_FILE']).chomp,
+    token: IO.read(ENV['TOKEN_FILE']).chomp,
+    prefix: CONFIG.prefix,
+    ignore_bots: true,
+    log_mode: :normal
+  }
+
   #create the bot
-  BOT = Discordrb::Commands::CommandBot.new(client_id: IO.read(ENV['CLIENT_FILE']).chomp,
-                                            token: IO.read(ENV['TOKEN_FILE']).chomp,
-                                            prefix: CONFIG.prefix,
-                                            ignore_bots: true)
+  BOT = Discordrb::Commands::CommandBot.new options
 
   #database
   Sequel.extension :migration

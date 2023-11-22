@@ -10,7 +10,7 @@ module Bot
     end
   end
 
-  def post_message(msg)
+  def self.post_message(msg)
     begin
       Bot.log "Posting #{msg}"
       BOT.channel(CONFIG.channel).split_send(msg)
@@ -19,7 +19,7 @@ module Bot
     end
   end
 
-  def post_file(file)
+  def self.post_file(file)
     begin 
       Bot.log "Posting #{file}"
       BOT.channel(CONFIG.channel).send_file(File.open(file,'r'))

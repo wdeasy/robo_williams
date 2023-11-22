@@ -26,7 +26,7 @@ module Bot
   }
 
   #create the bot
-  BOT = Discordrb::Commands::CommandBot.new options
+  BOT = Discordrb::Commands::CommandBot.new(**options)
 
   #database
   Sequel.extension :migration

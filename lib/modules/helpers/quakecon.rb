@@ -3,23 +3,27 @@ require 'date'
 module Bot
   def self.quakecon_check
     count = Date.parse(CONFIG.quakecon).mjd - Date.today.mjd
+    parts = [] << "Quakecon"
 
     case
-    when count > 0
-      Bot.countdown("Quakecon [#{count} days] - 🤖")
+    when count > 1
+      parts << "-[#{count} DAYS]-"
     when count == 1
-      Bot.countdown("Quakecon [#{count} day] - 🤖")
+      parts << "-[#{count} DAY]-"
     when count.between?(0, -3)
-      Bot.countdown("It's Quakecon! - 🤖")
+      parts << "-[NOW]-"
     else
-      Bot.countdown("Quakecon - 🤖")
+      parts << "-"
     end
+
+    parts << "🤖"
+    Bot.set_channel_name(parts.join(' '))
   end
 
-  def self.countdown(msg)
+  def self.set_channel_name(name)
     begin
-      Bot.log msg
-      BOT.channel(CONFIG.category).name = msg
+      Bot.log name
+      BOT.channel(CONFIG.category).name = name
     rescue Exception => e
       Bot.log_exception(e)
     end

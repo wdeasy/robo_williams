@@ -6,13 +6,22 @@ module Bot
 
     case
     when count > 0
-      BOT.channel(CONFIG.category).name = "Quakecon [#{count} days] - 🤖"
+      Bot.countdown("Quakecon [#{count} days] - 🤖")
     when count == 1
-      BOT.channel(CONFIG.category).name = "Quakecon [#{count} day] - 🤖"
+      Bot.countdown("Quakecon [#{count} day] - 🤖")
     when count.between?(0, -3)
-      BOT.channel(CONFIG.category).name = "It's Quakecon! - 🤖"      
+      Bot.countdown("It's Quakecon! - 🤖")
     else
-      BOT.channel(CONFIG.category).name = "Quakecon - 🤖"
+      Bot.countdown("Quakecon - 🤖")
+    end
+  end
+
+  def self.countdown(msg)
+    begin
+      Bot.log msg
+      BOT.channel(CONFIG.category).name = msg
+    rescue Exception => e
+      Bot.log_exception(e)
     end
   end
 end

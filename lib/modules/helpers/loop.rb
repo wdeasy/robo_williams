@@ -14,6 +14,9 @@ module Bot
 
       #shoutouts
       Bot.shoutout_check
+
+      #quakecon
+      Bot.quakecon_check
     end
 
   end

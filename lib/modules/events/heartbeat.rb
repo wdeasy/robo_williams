@@ -17,10 +17,6 @@ module Bot
           }
         rescue Timeout::Error
           Bot.log "Heartbeat did not finish in #{CONFIG.timeout} seconds."
-        # rescue Errno::ECONNRESET => e
-        #   Bot.log_exception(e)
-        rescue RuntimeError => e
-          Bot.log_exception(e)    
         end
 
         @heartbeat_in_progress = false

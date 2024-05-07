@@ -2,6 +2,8 @@
 prefix: "!"
 owner: 160619908063952907
 channel: 165310621049552897
+category: 570830514336956417
+quakecon: '8/8/2024'
 database: '../robowilliams.db'
 migrations: 'data/migrations'
 timeout: 180

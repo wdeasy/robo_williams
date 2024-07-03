@@ -4,12 +4,12 @@ require 'sequel'
 require 'yaml'
 
 module Bot
-  unless File.exists? ENV['CLIENT_FILE']
+  unless File.exist? ENV['CLIENT_FILE']
     puts "Discord Client ID missing. Exiting."
     exit
   end
 
-  unless File.exists? ENV['TOKEN_FILE']
+  unless File.exist? ENV['TOKEN_FILE']
     puts "Discord Token missing. Exiting."
     exit
   end

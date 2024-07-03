@@ -6,7 +6,7 @@ module Bot
     parts = [] << "Quakecon"
 
     case
-    when count > 1
+    when count >= 2
       parts << "-[#{count} DAYS]-"
     when count == 1
       parts << "-[#{count} DAY]-"

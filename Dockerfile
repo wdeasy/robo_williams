@@ -1,4 +1,4 @@
-FROM ruby:2.7.1-alpine AS base
+FROM ruby:3.3.3-alpine AS base
 
 RUN apk add --update \
   sqlite-dev \

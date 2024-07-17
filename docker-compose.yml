@@ -11,7 +11,7 @@ services:
     environment:
       - CLIENT_FILE=/run/secrets/robowilliams_client
       - TOKEN_FILE=/run/secrets/robowilliams_token
-    restart: unless-stopped      
+    restart: on-failure      
     volumes:
       - .:/usr/src/robowilliams  
 

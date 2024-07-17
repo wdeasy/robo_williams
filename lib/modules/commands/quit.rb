@@ -8,7 +8,7 @@ module Bot
 
         event.message.delete unless event.message.channel.pm?
 
-        BOT.stop
+        exit
       end
     end
   end

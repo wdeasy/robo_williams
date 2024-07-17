@@ -4,12 +4,12 @@ require 'sequel'
 require 'yaml'
 
 module Bot
-  unless File.exist? ENV['CLIENT_FILE']
+  unless File.file? ENV['CLIENT_FILE']
     puts "Discord Client ID missing. Exiting."
     exit
   end
 
-  unless File.exist? ENV['TOKEN_FILE']
+  unless File.file? ENV['TOKEN_FILE']
     puts "Discord Token missing. Exiting."
     exit
   end
@@ -57,10 +57,14 @@ module Bot
   $stdout.sync = true
   $stderr.sync = true
 
-  #docker stop handling
+  #docker stop handling  
+  at_exit do
+    BOT&.stop
+  end
+
   Signal.trap('TERM') do
     Bot.log 'Received SIGTERM. Shutting down.'
-    BOT.stop
+    exit
   end
 
   #run

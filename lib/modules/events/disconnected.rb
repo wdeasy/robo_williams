@@ -7,6 +7,7 @@ module Bot
         next if BOT.connected?
 
         Bot.log "Still disconnected after #{CONFIG.timeout} seconds."
+        BOT.stop
       end
     end
   end

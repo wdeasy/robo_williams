@@ -57,13 +57,13 @@ module Bot
   $stdout.sync = true
   $stderr.sync = true
 
-  #docker stop handling  
   at_exit do
-    BOT&.stop
+    Bot.log 'I was just learning to love...'
+    BOT.stop
   end
 
+  #docker stop handling 
   Signal.trap('TERM') do
-    Bot.log 'Received SIGTERM. Shutting down.'
     exit
   end
 

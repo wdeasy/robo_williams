@@ -1,6 +1,3 @@
-require 'date'
-require 'time'
-
 module Bot
   module DiscordEvents
     module Ready

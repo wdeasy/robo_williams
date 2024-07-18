@@ -1,8 +1,8 @@
-require 'date'
-
 module Bot
+  @quakecon = Date.parse(CONFIG.quakecon)
+
   def self.quakecon_check
-    count = Date.parse(CONFIG.quakecon).mjd - Date.today.mjd
+    count = (@quakecon - @today).to_i
     parts = [] << "Quakecon"
 
     case

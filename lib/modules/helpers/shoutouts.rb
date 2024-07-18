@@ -1,11 +1,9 @@
-require 'date'
-
 module Bot
   @shoutouts = DB[:shoutouts]
 
   def self.shoutout_check
     @shoutouts.each do |shoutout|
-      next unless shoutout[:day].month == Date.today.month && shoutout[:day].day == Date.today.day
+      next unless shoutout[:day].month == @today.month && shoutout[:day].day == @today.day
 
       msg = "\@here LETS GIVE A QUICK SHOUT OUT TO "
 

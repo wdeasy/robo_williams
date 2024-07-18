@@ -1,13 +1,12 @@
 require 'date'
-require 'time'
 
 module Bot
-  @last_motd = Date.today
+  @today = Date.today
 
   def self.loop
 
-    if Date.today > @last_motd
-      @last_motd = Date.today
+    if Date.today > @today
+      @today = Date.today
 
       #thursday the 20th
       Bot.thursday_check
@@ -18,6 +17,6 @@ module Bot
       #quakecon
       Bot.quakecon_check
     end
-
+    Bot.quakecon_check
   end
 end

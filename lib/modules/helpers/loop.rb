@@ -17,6 +17,6 @@ module Bot
       #quakecon
       Bot.quakecon_check
     end
-    Bot.quakecon_check
+
   end
 end

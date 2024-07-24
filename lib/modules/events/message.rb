@@ -12,11 +12,8 @@ module Bot
         end
 
         next if matches.empty?
-
         match = matches.sample
-
         Bot.log "#{event.author.username}: #{event.content}"
-
         msg = nil
 
         unless match[:file].nil?

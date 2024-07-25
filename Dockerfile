@@ -2,7 +2,18 @@ FROM ruby:3.3.3-alpine AS base
 
 RUN apk add --update \
   sqlite-dev \
-  tzdata
+  tzdata \
+  libsodium-dev \
+  ffmpeg \
+  opus-dev \
+  py3-pip \ 
+  py3-virtualenv
+
+ENV VIRTUAL_ENV=/opt/venv
+RUN python3 -m venv $VIRTUAL_ENV
+ENV PATH="$VIRTUAL_ENV/bin:$PATH"
+
+RUN pip install yt-dlp
 
 FROM base AS dependencies
 

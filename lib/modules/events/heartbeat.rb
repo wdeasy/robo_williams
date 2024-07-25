@@ -1,5 +1,3 @@
-require 'timeout'
-
 module Bot
   module DiscordEvents
     module Heartbeat

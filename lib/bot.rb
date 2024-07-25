@@ -1,6 +1,7 @@
 require 'bundler/setup'
 require 'discordrb'
 require 'sequel'
+require 'timeout'
 require 'yaml'
 
 module Bot

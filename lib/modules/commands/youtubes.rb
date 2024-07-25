@@ -12,13 +12,11 @@ module Bot
             @playing = true  
 
             url = URI(args[0])
-
             next if url.host.nil?  
             next unless ['youtu.be', 'youtube.com', 'www.youtube.com'].include?(url.host)
 
-            channel = event.user.voice_channel
-            next unless channel
-            BOT.voice_connect(channel)
+            next unless event.user.voice_channel
+            BOT.voice_connect(event.user.voice_channel)
 
             voice_bot = event.voice
 
@@ -28,11 +26,11 @@ module Bot
                 }                
             rescue Timeout::Error
                 Bot.log "Youtubes hit #{CONFIG.timeout} timeout."
-            end            
+            end
 
             voice_bot.destroy
-            @playing = false
 
+            @playing = false
             nil
         end
       end

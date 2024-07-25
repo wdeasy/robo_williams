@@ -6,7 +6,8 @@ module Bot
 
         command(:youtubes, description: "Play the audio of a youtube video.") do |event, *args|
             Bot.log "#{event.author.username}: #{event.content}"
-            event.message.delete unless event.message.channel.pm?
+            next if event.message.channel.pm?
+            event.message.delete
 
             next unless @playing == false
             @playing = true  
@@ -15,8 +16,9 @@ module Bot
             next if url.host.nil?  
             next unless ['youtu.be', 'youtube.com', 'www.youtube.com'].include?(url.host)
 
-            next unless event.user.voice_channel
-            BOT.voice_connect(event.user.voice_channel)
+            channel = event.user.voice_channel
+            next unless channel
+            BOT.voice_connect(channel)
 
             voice_bot = event.voice
 

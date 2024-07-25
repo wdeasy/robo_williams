@@ -19,7 +19,7 @@ module Bot
         unless match[:file].nil?
           begin
             msg = event.send_file(File.open("data/images/#{match[:file]}",'r'))
-          rescue Exception => e
+          rescue StandardError => e
             Bot.log_exception(e)
           end
         end
@@ -27,7 +27,7 @@ module Bot
         unless match[:text].nil?
           begin
             msg = event.respond(match[:text])
-          rescue Exception => e
+          rescue StandardError => e
             Bot.log_exception(e)
           end
         end
@@ -40,7 +40,7 @@ module Bot
             end
 
             event.react(match[:emoji]) 
-          rescue Exception => e
+          rescue StandardError => e
             Bot.log_exception(e)
           end
         end

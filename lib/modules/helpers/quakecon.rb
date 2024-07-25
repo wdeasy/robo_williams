@@ -24,7 +24,7 @@ module Bot
     begin
       Bot.log name
       BOT.channel(CONFIG.category).name = name
-    rescue Exception => e
+    rescue StandardError => e
       Bot.log_exception(e)
     end
   end

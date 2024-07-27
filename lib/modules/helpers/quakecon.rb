@@ -3,24 +3,23 @@ module Bot
 
   def self.quakecon_check
     count = (@quakecon - @today).to_i
+
     parts = [] << "Quakecon"
-
-    case
-    when count >= 2
-      parts << "-[#{count} DAYS]-"
-    when count == 1
-      parts << "-[#{count} DAY]-"
-    when count.between?(0, -3)
-      parts << "-[NOW]-"
-    else
-      parts << "-"
-    end
-
+    parts << Bot.countdown(count)
     parts << "🤖"
-    Bot.set_channel_name(parts.join(' '))
+
+    Bot.channel_name(parts.join(' '))
   end
 
-  def self.set_channel_name(name)
+  def self.countdown(count)
+    return "-[#{count} DAYS]-" if count >= 2
+    return "-[#{count} DAY]-" if count == 1
+    return '-[NOW]-' if count.between?(0, -3)
+
+    return '-'
+  end
+
+  def self.channel_name(name)
     begin
       Bot.log name
       BOT.channel(CONFIG.category).name = name

@@ -24,28 +24,30 @@ module Bot
         @playing = false
         nil
       end
-    end
 
-    def self.play(voice_bot, url)
-      Timeout.timeout(CONFIG.timeout){
-        cmd = "yt-dlp -q -o - #{Shellwords.escape(url)}"
+      def self.play(voice_bot, url)
+        Timeout.timeout(CONFIG.timeout){
+          cmd = "yt-dlp -q -o - #{Shellwords.escape(url)}"
 
-        IO.popen(cmd) do |stream|
-          voice_bot.play_io(stream)
+          IO.popen(cmd) do |stream|
+            voice_bot.play_io(stream)
 
-          stream.close
-          Bot.log "yt-dlp exited #{$?.exitstatus}" unless $?.success?
-        end
-      } 
-    rescue Timeout::Error
-      Bot.log "Youtubes hit #{CONFIG.timeout} timeout."
-    end      
+            stream.close
+            Bot.log "yt-dlp exited #{$?.exitstatus}" unless $?.success?
+          end
+        } 
+      rescue Timeout::Error
+        Bot.log "Youtubes hit #{CONFIG.timeout} timeout."
+      end      
 
-    def self.valid_url(url)
-      uri = URI(url)
-      return unless ['youtu.be', 'youtube.com', 'www.youtube.com'].include?(url.host)
-    rescue URI::InvalidURIError
-      Bot.log "Invalid Youtube URL."
-    end
+      def self.valid_url(url)
+        uri = URI(url)
+        return unless ['youtu.be', 'youtube.com', 'www.youtube.com'].include?(uri.host)
+
+        uri.to_s
+      rescue URI::InvalidURIError
+        Bot.log "Invalid Youtube URL."
+      end
+    end    
   end
 end

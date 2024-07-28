@@ -1,5 +1,8 @@
+# frozen_string_literal: true
+
 module Bot
   module DiscordEvents
+    # Message events
     module Message
       @messages = DB[:messages].order(Sequel.char_length(:regex).distinct.desc)
 
@@ -26,8 +29,8 @@ module Bot
       end
 
       def self.pick_match(matches)
-        max = matches.max_by{ |m| m[:regex].length }[:regex].length
-        filtered = matches.select{ |match| match[:regex].length == max}
+        max = matches.max_by { |m| m[:regex].length }[:regex].length
+        filtered = matches.select { |match| match[:regex].length == max }
 
         filtered.sample
       end
@@ -42,7 +45,7 @@ module Bot
       end
 
       def self.reply_file(event, file)
-        event.send_file(File.open("data/images/#{file}",'r'))
+        event.send_file(File.open("data/images/#{file}", 'r'))
       rescue StandardError => e
         Bot.log_exception(e)
       end
@@ -51,13 +54,13 @@ module Bot
         event.respond(text)
       rescue StandardError => e
         Bot.log_exception(e)
-      end        
+      end
 
       def self.reply_emoji(event, emoji)
-        event.react(emoji) 
+        event.react(emoji)
       rescue StandardError => e
         Bot.log_exception(e)
-      end        
+      end
     end
   end
 end

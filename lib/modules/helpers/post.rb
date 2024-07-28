@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Post helpers
 module Bot
   def self.post_response(event, msg)
     Bot.log "#{event.author.username}: #{event.content}"
@@ -5,7 +8,7 @@ module Bot
     event.channel.split_send(msg)
   rescue StandardError => e
     Bot.log "Error with the #{event.command.name} command."
-    Bot.log_exception(e)      
+    Bot.log_exception(e)
   end
 
   def self.post_message(msg)
@@ -17,7 +20,7 @@ module Bot
 
   def self.post_file(file)
     Bot.log "Posting #{file}"
-    BOT.channel(CONFIG.channel).send_file(File.open(file,'r'))
+    BOT.channel(CONFIG.channel).send_file(File.open(file, 'r'))
   rescue StandardError => e
     Bot.log_exception(e)
   end

@@ -1,22 +1,23 @@
+# frozen_string_literal: true
+
 require 'date'
 
+# MOTD
 module Bot
   @today = Date.today
 
   def self.loop
+    return unless Date.today > @today
 
-    if Date.today > @today
-      @today = Date.today
+    @today = Date.today
 
-      #thursday the 20th
-      Bot.thursday_check
+    # thursday the 20th
+    Bot.thursday_check
 
-      #shoutouts
-      Bot.shoutout_check
+    # shoutouts
+    Bot.shoutout_check
 
-      #quakecon
-      Bot.quakecon_check
-    end
-
+    # quakecon
+    Bot.quakecon_check
   end
 end

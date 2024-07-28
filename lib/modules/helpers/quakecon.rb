@@ -1,12 +1,15 @@
+# frozen_string_literal: true
+
+# Quakecon
 module Bot
   @quakecon = Date.parse(CONFIG.quakecon)
 
   def self.quakecon_check
     count = (@quakecon - @today).to_i
 
-    parts = [] << "Quakecon"
+    parts = [] << 'Quakecon'
     parts << Bot.countdown(count)
-    parts << "🤖"
+    parts << '🤖'
 
     Bot.channel_name(parts.join(' '))
   end
@@ -16,15 +19,13 @@ module Bot
     return "-[#{count} DAY]-" if count == 1
     return '-[NOW]-' if count.between?(0, -3)
 
-    return '-'
+    '-'
   end
 
   def self.channel_name(name)
-    begin
-      Bot.log name
-      BOT.channel(CONFIG.category).name = name
-    rescue StandardError => e
-      Bot.log_exception(e)
-    end
+    Bot.log name
+    BOT.channel(CONFIG.category).name = name
+  rescue StandardError => e
+    Bot.log_exception(e)
   end
 end

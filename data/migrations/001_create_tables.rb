@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 Sequel.migration do
   change do
-    puts "Creating Tables..."
+    puts 'Creating Tables...'
 
     create_table(:shoutouts) do
       primary_key :id

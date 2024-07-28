@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Shoutouts
 module Bot
   @shoutouts = DB[:shoutouts]
 

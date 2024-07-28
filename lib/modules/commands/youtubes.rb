@@ -8,34 +8,42 @@ module Bot
     # Youtubes command
     module Youtubes
       extend Discordrb::Commands::CommandContainer
-      @playing = false
+      @playing = nil
 
       command(:youtubes, description: 'Play the audio of a youtube video.') do |event, *args|
-        Bot.log "#{event.author.username}: #{event.content}"
-        event.message.delete unless event.message.channel.pm?
-
-        next unless @playing == false
-
-        @playing = true
-
-        url = Youtubes.valid_url(args[0])
-        next unless url && event.user.voice_channel
-
-        BOT.voice_connect(event.user.voice_channel)
-        voice_bot = event.voice
-        Youtubes.play(voice_bot, url)
-        voice_bot.destroy
-
-        @playing = false
-        nil
+        Youtubes.play_youtube(event, args[0])
       end
 
-      def self.play(voice_bot, url)
+      def self.play_youtube(event, url)
+        Bot.log "#{event.author.username}: #{event.content}"
+        event.message.delete unless event.message.channel.pm?
+        return unless @playing.nil? && event.user.voice_channel
+
+        @playing = Youtubes.valid_url(url)
+        return unless @playing
+
+        voice = Youtubes.connect(event)
+        Youtubes.play(voice, @playing)
+        Youtubes.disconnect(voice)
+      end
+
+      def self.connect(event)
+        BOT.voice_connect(event.user.voice_channel)
+        event.voice
+      end
+
+      def self.disconnect(voice_bot)
+        voice_bot.destroy
+
+        @playing = nil
+      end
+
+      def self.play(voice, url)
         Timeout.timeout(CONFIG.timeout) do
           cmd = "yt-dlp -q -o - #{Shellwords.escape(url)}"
 
           IO.popen(cmd) do |stream|
-            voice_bot.play_io(stream)
+            voice.play_io(stream)
 
             stream.close
             Bot.log "yt-dlp exited #{$CHILD_STATUS.exitstatus}" unless $CHILD_STATUS.success?

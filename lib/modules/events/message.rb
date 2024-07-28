@@ -8,13 +8,16 @@ module Bot
 
       extend Discordrb::EventContainer
       message do |event|
-        matches = Message.matches(event.content)
-        next if matches.empty?
+        Message.process(event)
+      end
 
-        match = Message.pick_match(matches)
+      def self.process(event)
+        matches = Message.matches(event.content)
+        return if matches.empty?
 
         Bot.log "#{event.author.username}: #{event.content}"
 
+        match = Message.pick_match(matches)
         Message.reply(event, match)
       end
 

@@ -40,31 +40,25 @@ module Bot
 
         word = []
 
-        start = 0
-        finish = (arg.length - 1)
-
-        while start <= (arg.length - 1)
-          while finish >= start
-
-            buffer = arg[start..finish]
-            if @emojis.key?(buffer)
-              word << @emojis[buffer].sample
-              start += buffer.length
-              next
-            end
-
-            if buffer.length == 1
-              word << Bot.no_emoji(buffer)
-              start += 1
-            end
-
-            finish -= 1
-          end
-
-          finish = (arg.length - 1)
+        until arg.empty?
+          buffer, emoji = Wildo.get_emoji(arg)
+          word << emoji
+          arg = arg[buffer.length..]
         end
 
         word.join(' ')
+      end
+
+      def self.get_emoji(string)
+        buffer = string
+
+        until buffer.empty?
+          return buffer, @emojis[buffer].sample if @emojis.key?(buffer)
+
+          buffer = buffer[0..-2]
+        end
+
+        [string[0], Bot.no_emoji(string[0])]
       end
     end
   end

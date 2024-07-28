@@ -22,47 +22,7 @@ module Bot
       }
 
       command(:wildo, description: '✝️️ 🇾 🅿️️ 📧   🇱 ℹ️️ 🇰 📧   ✝️️ 🇭 ℹ️️ 🇸') do |event, *args|
-        Bot.post_response(event, Wildo.build_words(args))
-      end
-
-      def self.build_words(args)
-        words = []
-
-        args.each do |arg|
-          words << Wildo.build_word(arg.downcase)
-        end
-
-        Bot.clean_words(words.join('   '))
-      end
-
-      def self.build_word(arg)
-        return arg.to_s if Bot.skip_word(arg)
-
-        word = []
-
-        until arg.empty?
-          buffer = Wildo.get_buffer(arg)
-          word << Wildo.get_emoji(buffer)
-          arg = arg[buffer.length..]
-        end
-
-        word.join(' ')
-      end
-
-      def self.get_buffer(string)
-        until string.length == 1
-          return string if @emojis.key?(string)
-
-          string = string[..-2]
-        end
-
-        string
-      end
-
-      def self.get_emoji(string)
-        return @emojis[string].sample if @emojis.key?(string)
-
-        Bot.no_emoji(string)
+        Bot.post_response(event, Bot.build_words(@emojis, args))
       end
     end
   end

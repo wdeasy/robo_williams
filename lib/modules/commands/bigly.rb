@@ -49,34 +49,7 @@ module Bot
       }
 
       command(:bigly, description: '🇹 🇾 🇵 🇪    🇱 🇮 🇰 🇪    🇹 🇭 🇮 🇸') do |event, *args|
-        Bot.post_response(event, Bigly.build_words(args))
-      end
-
-      def self.build_words(args)
-        words = []
-
-        args.each do |arg|
-          words << Bigly.build_word(arg.downcase) unless arg.nil?
-        end
-
-        Bot.clean_words(words.join('   '))
-      end
-
-      def self.build_word(arg)
-        return arg.to_s if Bot.skip_word(arg)
-
-        word = []
-
-        arg.split('').each do |a|
-          if @emojis.key?(a)
-            word << @emojis[a].sample
-            next
-          end
-
-          word << Bot.no_emoji(a)
-        end
-
-        word.join(' ')
+        Bot.post_response(event, Bot.build_words(@emojis, args))
       end
     end
   end

@@ -15,7 +15,7 @@ Sequel.migration do
       { name: 'Rune Niserius', day: '1900-06-13', discord: nil },
       { name: '', day: '1900-06-27', discord: '<@!165613111368351744>' },
       { name: '', day: '1900-08-18', discord: '<@!165313516985778176>' },
-      { name: "'nil'", day: '1900-08-27', discord: '<@164140817718575106>' },
+      { name: '', day: '1900-08-27', discord: '<@164140817718575106>' },
       { name: 'THE CAT FRANKLIN', day: '1900-09-16', discord: nil },
       { name: '', day: '1900-09-22', discord: '<@!154437803562762240>' },
       { name: '', day: '1900-10-07', discord: '<@186187913745137675>' },

@@ -2,14 +2,10 @@
 
 # Emoji helpers
 module Bot
-  def self.no_emoji(char)
-    "**#{char}**"
-  end
-
   def self.get_emoji(emojis, string)
     return emojis[string].sample if emojis.key?(string)
 
-    Bot.no_emoji(string)
+    "**#{string}**"
   end
 
   def self.skip_word(arg)
@@ -42,7 +38,7 @@ module Bot
   end
 
   def self.build_word(emojis, arg)
-    return arg.to_s if Bot.skip_word(arg)
+    return arg if Bot.skip_word(arg)
 
     word = []
 

@@ -6,4 +6,4 @@ category: 570830514336956417
 quakecon: '2024-08-08'
 database: '../robowilliams.db'
 migrations: 'data/migrations'
-timeout: 180
+timeout: 300

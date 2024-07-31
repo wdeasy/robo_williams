@@ -39,12 +39,10 @@ module Bot
       end
 
       def self.reply(event, match)
-        msg = nil
-        msg = Message.reply_file(event, match[:file]) unless match[:file].nil?
+        msg = match[:file].nil? ? nil : Message.reply_file(event, match[:file])
         msg = Message.reply_text(event, match[:text]) unless match[:text].nil?
 
-        msg = event if msg.nil?
-        Message.reply_emoji(msg, match[:emoji]) unless match[:emoji].nil?
+        Message.reply_emoji(msg.nil? ? event : msg, match[:emoji]) unless match[:emoji].nil?
       end
 
       def self.reply_file(event, file)

@@ -8,14 +8,11 @@ module Bot
     @shoutouts.each do |shoutout|
       next unless shoutout[:day].month == @today.month && shoutout[:day].day == @today.day
 
-      msg = "\@here LETS GIVE A QUICK SHOUT OUT TO "
+      msg = ['@here LETS GIVE A QUICK SHOUT OUT TO']
+      msg << shoutout[:discord]
+      msg << shoutout[:name]
 
-      unless shoutout[:discord].nil?
-        Bot.post_message(msg + shoutout[:discord])
-        next
-      end
-
-      Bot.post_message(msg + shoutout[:name])
+      Bot.post_message(msg.compact.join(' ').strip)
     end
   end
 end

@@ -5,26 +5,26 @@ require 'shellwords'
 
 module Bot
   module DiscordCommands
-    # Youtubes command
-    module Youtubes
+    # HLDJ command
+    module HLDJ
       extend Discordrb::Commands::CommandContainer
       @playing = nil
 
-      command(:youtubes, description: 'Play the audio of a youtube video.') do |event, *args|
-        Youtubes.play_youtube(event, args[0])
+      command(:hldj, description: 'Plays audio in a voice channel.') do |event, *args|
+        HLDJ.play_audio(event, args[0])
       end
 
-      def self.play_youtube(event, url)
+      def self.play_audio(event, url)
         Bot.log "#{event.author.username}: #{event.content}"
         event.message.delete unless event.message.channel.pm?
         return unless @playing.nil? && event.user.voice_channel
 
-        @playing = Youtubes.valid_url(url)
+        @playing = HLDJ.valid_url(url)
         return unless @playing
 
-        voice = Youtubes.connect(event)
-        Youtubes.play(voice, @playing)
-        Youtubes.disconnect(voice)
+        voice = HLDJ.connect(event)
+        HLDJ.play(voice, @playing)
+        HLDJ.disconnect(voice)
       end
 
       def self.connect(event)
@@ -50,16 +50,13 @@ module Bot
           end
         end
       rescue Timeout::Error
-        Bot.log "Youtubes hit #{CONFIG.timeout} timeout."
+        Bot.log "HLDJ hit #{CONFIG.timeout} timeout."
       end
 
       def self.valid_url(url)
         uri = URI(url)
-        return unless ['youtu.be', 'youtube.com', 'www.youtube.com'].include?(uri.host)
-
-        uri.to_s
       rescue URI::InvalidURIError
-        Bot.log 'Invalid Youtube URL.'
+        Bot.log 'Invalid URL.'
       end
     end
   end

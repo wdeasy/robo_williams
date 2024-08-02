@@ -54,7 +54,7 @@ module Bot
       end
 
       def self.valid_url(url)
-        uri = URI(url)
+        URI(url)
       rescue URI::InvalidURIError
         Bot.log 'Invalid URL.'
       end

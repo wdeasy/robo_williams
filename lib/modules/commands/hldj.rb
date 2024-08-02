@@ -10,7 +10,7 @@ module Bot
       extend Discordrb::Commands::CommandContainer
       @playing = nil
 
-      command(:hldj, description: 'Plays audio in a voice channel.') do |event, *args|
+      command(:hldj, description: 'Play audio in your current voice channel') do |event, *args|
         HLDJ.play_audio(event, args[0])
       end
 

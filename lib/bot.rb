@@ -20,7 +20,6 @@ module Bot
 
   # bot config
   CONFIG = YAML.load_file 'data/config.yaml'
-  puts CONFIG
 
   options = {
     client_id: File.read(ENV.fetch('CLIENT_FILE', nil)).chomp,

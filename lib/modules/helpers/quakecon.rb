@@ -2,7 +2,7 @@
 
 # Quakecon
 module Bot
-  @quakecon = Date.parse(CONFIG.quakecon)
+  @quakecon = Date.parse(CONFIG[:quakecon])
 
   def self.quakecon_check
     count = (@quakecon - @today).to_i
@@ -24,7 +24,7 @@ module Bot
 
   def self.channel_name(name)
     Bot.log name
-    BOT.channel(CONFIG.category).name = name
+    BOT.channel(CONFIG[:category]).name = name
   rescue StandardError => e
     Bot.log_exception(e)
   end

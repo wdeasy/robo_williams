@@ -3,7 +3,6 @@
 require 'bundler/setup'
 require 'discordrb'
 require 'sequel'
-require 'ostruct'
 require 'timeout'
 require 'yaml'
 
@@ -20,12 +19,13 @@ module Bot
   end
 
   # bot config
-  CONFIG = OpenStruct.new YAML.load_file 'data/config.yaml'
+  CONFIG = YAML.load_file 'data/config.yaml'
+  puts CONFIG
 
   options = {
-    client_id: IO.read(ENV['CLIENT_FILE']).chomp,
-    token: IO.read(ENV['TOKEN_FILE']).chomp,
-    prefix: CONFIG.prefix,
+    client_id: File.read(ENV.fetch('CLIENT_FILE', nil)).chomp,
+    token: File.read(ENV.fetch('TOKEN_FILE', nil)).chomp,
+    prefix: CONFIG[:prefix],
     ignore_bots: true,
     log_mode: :normal
   }
@@ -36,7 +36,7 @@ module Bot
   # database
   Sequel.extension :migration
   DB = Sequel.sqlite
-  Sequel::Migrator.run(DB, CONFIG.migrations)
+  Sequel::Migrator.run(DB, CONFIG[:migrations])
 
   # bot helpers
   Dir['lib/modules/helpers/*.rb'].each { |mod| load mod }

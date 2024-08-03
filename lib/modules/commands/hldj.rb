@@ -39,7 +39,7 @@ module Bot
       end
 
       def self.play(voice, url)
-        Timeout.timeout(CONFIG.timeout) do
+        Timeout.timeout(CONFIG[:timeout]) do
           cmd = "yt-dlp -q -o - #{Shellwords.escape(url)}"
 
           IO.popen(cmd) do |stream|
@@ -50,7 +50,7 @@ module Bot
           end
         end
       rescue Timeout::Error
-        Bot.log "HLDJ hit #{CONFIG.timeout} timeout."
+        Bot.log "HLDJ hit #{CONFIG[:timeout]} timeout."
       end
 
       def self.valid_url(url)

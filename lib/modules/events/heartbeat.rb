@@ -13,11 +13,11 @@ module Bot
         @heartbeat_in_progress = true
 
         begin
-          Timeout.timeout(CONFIG.timeout) do
+          Timeout.timeout(CONFIG[:timeout]) do
             Bot.loop
           end
         rescue Timeout::Error
-          Bot.log "Heartbeat did not finish in #{CONFIG.timeout} seconds."
+          Bot.log "Heartbeat did not finish in #{CONFIG[:timeout]} seconds."
         end
 
         @heartbeat_in_progress = false

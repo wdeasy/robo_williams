@@ -4,8 +4,6 @@ module Bot
   module DiscordEvents
     # Message events
     module Message
-      @messages = DB[:messages].order(Sequel.char_length(:regex).distinct.desc)
-
       extend Discordrb::EventContainer
       message do |event|
         Message.process(event)
@@ -24,8 +22,8 @@ module Bot
       def self.matches(content)
         matches = []
 
-        @messages.each do |msg|
-          matches.push(msg) if content.downcase.match(Regexp.new(msg[:regex]))
+        DB[:messages].each do |msg|
+          matches.push(msg) if content.downcase.match(msg[:regex])
         end
 
         matches

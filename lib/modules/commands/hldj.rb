@@ -32,8 +32,8 @@ module Bot
         event.voice
       end
 
-      def self.disconnect(voice_bot)
-        voice_bot.destroy
+      def self.disconnect(voice)
+        voice.destroy
 
         @playing = nil
       end

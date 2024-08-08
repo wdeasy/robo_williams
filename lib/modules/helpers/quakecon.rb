@@ -17,7 +17,7 @@ module Bot
   def self.countdown(count)
     return "-[#{count} DAYS]-" if count >= 2
     return "-[#{count} DAY]-" if count == 1
-    return '-[NOW]-' if count.between?(0, -3)
+    return '-[NOW]-' if count.between?(-3, 0)
 
     '-'
   end

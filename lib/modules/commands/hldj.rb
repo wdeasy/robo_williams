@@ -40,6 +40,7 @@ module Bot
 
       def self.play(voice, url)
         Timeout.timeout(CONFIG[:timeout]) do
+          voice.filter_volume = 0.5
           cmd = "yt-dlp -q -o - #{Shellwords.escape(url)}"
 
           IO.popen(cmd) do |stream|

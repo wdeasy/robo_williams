@@ -23,7 +23,6 @@ module Bot
         return unless @playing
 
         voice = HLDJ.connect(event)
-        voice.volume = CONFIG[:volume]
 
         HLDJ.play(voice, @playing)
         HLDJ.disconnect(voice)
@@ -31,6 +30,8 @@ module Bot
 
       def self.connect(event)
         BOT.voice_connect(event.user.voice_channel)
+        event.voice.volume = CONFIG[:volume]
+
         event.voice
       end
 

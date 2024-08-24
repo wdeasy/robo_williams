@@ -58,8 +58,7 @@ module Bot
   BOT.bucket :limit, limit: 60, time_span: 60, delay: 1
 
   # logging
-  $stdout.sync = true
-  $stderr.sync = true
+  $stderr.sync = $stdout.sync = true
 
   at_exit do
     Bot.log 'I was just learning to love...'

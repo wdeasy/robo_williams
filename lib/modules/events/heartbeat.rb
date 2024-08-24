@@ -14,7 +14,7 @@ module Bot
 
         begin
           Timeout.timeout(CONFIG[:timeout]) do
-            Bot.loop
+            Bot.motd
           end
         rescue Timeout::Error
           Bot.log "Heartbeat did not finish in #{CONFIG[:timeout]} seconds."

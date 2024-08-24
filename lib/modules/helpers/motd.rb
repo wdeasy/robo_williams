@@ -6,7 +6,7 @@ require 'date'
 module Bot
   @today = Date.today
 
-  def self.loop
+  def self.motd
     return unless Date.today > @today
 
     @today = Date.today

@@ -3,11 +3,11 @@
 # Quakecon
 module Bot
   @quakecon = Date.parse(CONFIG[:quakecon])
-  @last = -3
+  @last_day = -3
 
   def self.quakecon_check
     count = (@quakecon - @today).to_i
-    return if count < @last
+    return if count < @last_day
 
     parts = [] << 'Quakecon'
     parts << Bot.countdown(count)
@@ -17,9 +17,9 @@ module Bot
   end
 
   def self.countdown(count)
-    return "-[#{count} DAYS]-" if count >= 2
+    return "-[#{count} DAYS]-" if count > 1
     return "-[#{count} DAY]-" if count == 1
-    return '-[YEA NOW]-' if count.between?(@last, 0)
+    return '-[YEA NOW]-' if count.between?(@last_day, 0)
 
     '-'
   end

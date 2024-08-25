@@ -2,31 +2,6 @@
 
 # Emoji helpers
 module Bot
-  def self.get_emoji(emojis, string)
-    return emojis[string].sample if emojis.key?(string)
-
-    "**#{string}**"
-  end
-
-  def self.skip_word(arg)
-    return true if arg[0] == ':' && arg[-1] == ':'
-    return true if arg[0, 2] == '<@' && arg[-1] == '>'
-    return true if arg[0] == '@'
-
-    false
-  end
-
-  def self.clean_words(words)
-    words.sub! ' 🏻', '🏻'
-    words.sub! ' 🏼', '🏼'
-    words.sub! ' 🏽', '🏽'
-    words.sub! ' 🏾', '🏾'
-    words.sub! ' 🏿', '🏿'
-    words.sub! ' ⃣', ''
-
-    words.strip
-  end
-
   def self.build_words(emojis, args)
     words = []
 
@@ -59,5 +34,30 @@ module Bot
     end
 
     string
+  end
+
+  def self.get_emoji(emojis, string)
+    return emojis[string].sample if emojis.key?(string)
+
+    "**#{string}**"
+  end
+
+  def self.clean_words(words)
+    words.sub! ' 🏻', '🏻'
+    words.sub! ' 🏼', '🏼'
+    words.sub! ' 🏽', '🏽'
+    words.sub! ' 🏾', '🏾'
+    words.sub! ' 🏿', '🏿'
+    words.sub! ' ⃣', ''
+
+    words.strip
+  end  
+
+  def self.skip_word(arg)
+    return true if arg[0] == ':' && arg[-1] == ':'
+    return true if arg[0, 2] == '<@' && arg[-1] == '>'
+    return true if arg[0] == '@'
+
+    false
   end
 end

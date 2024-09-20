@@ -10,7 +10,7 @@ module Bot
     return unless Date.today > @today
 
     @today = Date.today
-    Bot.log "Level #{(@today - @start).to_i}."
+    Bot.log "Ding! Level #{(@today - @start).to_i}"
 
     # thursday the 20th
     Bot.thursday_check

@@ -3,8 +3,7 @@
 :owner: 160619908063952907
 :channel: 165310621049552897
 :category: 570830514336956417
-:quakecon: '2024-08-08'
-:database: '../robowilliams.db'
+:quakecon: '2025-08-07'
 :migrations: 'data/migrations'
 :timeout: 300
 :volume: 0.2

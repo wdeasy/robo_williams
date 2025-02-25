@@ -5,6 +5,6 @@ Sequel.migration do
     puts 'Put some speck on it...'
 
     from(:messages).insert(%i[regex text emoji],
-                           ['\b[r][i][p]\b', 'press F to put some speck on it.', '🇫'])
+                           ['\b[r][i][p]\b', 'Press F to put some speck on it', '🇫'])
   end
 end

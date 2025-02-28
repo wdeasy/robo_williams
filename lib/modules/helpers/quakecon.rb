@@ -24,7 +24,7 @@ module Bot
 
   def self.channel_name(name)
     return if name == BOT.channel(CONFIG[:category]).name
-    
+
     Bot.log name
     BOT.channel(CONFIG[:category]).name = name
   rescue StandardError => e

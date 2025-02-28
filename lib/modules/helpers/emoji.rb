@@ -51,7 +51,7 @@ module Bot
     words.sub! ' ⃣', ''
 
     words.strip
-  end  
+  end
 
   def self.skip_word(arg)
     return true if arg[0] == ':' && arg[-1] == ':'

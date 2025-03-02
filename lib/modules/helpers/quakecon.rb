@@ -23,7 +23,7 @@ module Bot
   end
 
   def self.channel_name(name)
-    return if name == BOT.channel(CONFIG[:category]).name
+    return if BOT.channel(CONFIG[:category]).name == name
 
     Bot.log name
     BOT.channel(CONFIG[:category]).name = name

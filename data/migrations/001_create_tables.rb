@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 Sequel.migration do
-  change do
+  up do
     puts 'Creating Tables...'
 
     create_table(:shoutouts) do

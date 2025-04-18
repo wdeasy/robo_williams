@@ -6,7 +6,7 @@ module Bot
     module Jeb
       extend Discordrb::Commands::CommandContainer
       command(:jeb, description: 'TYPE:clap:LIKE:clap:THIS') do |event, *args|
-        Bot.post_response(event, "**#{args.map(&:upcase).join('**:clap:**').strip}**")
+        Bot.response_message(event, "**#{args.map(&:upcase).join('**:clap:**').strip}**")
       end
     end
   end

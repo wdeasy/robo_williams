@@ -6,8 +6,11 @@ RUN apk add --update \
   libsodium-dev \
   ffmpeg \
   opus-dev \
-  py3-pip \ 
-  py3-virtualenv
+  py3-pip \
+  py3-virtualenv \
+  imagemagick \
+  imagemagick-dev \
+  imagemagick-libs
 
 ENV VIRTUAL_ENV=/opt/venv
 RUN python3 -m venv $VIRTUAL_ENV

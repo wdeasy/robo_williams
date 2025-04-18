@@ -49,7 +49,7 @@ module Bot
       }
 
       command(:bigly, description: '🇹 🇾 🇵 🇪    🇱 🇮 🇰 🇪    🇹 🇭 🇮 🇸') do |event, *args|
-        Bot.post_response(event, Bot.build_words(@emojis, args))
+        Bot.response_message(event, Bot.build_words(@emojis, args))
       end
     end
   end

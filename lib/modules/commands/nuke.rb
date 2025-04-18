@@ -39,10 +39,10 @@ module Bot
       def self.alter_image(input, output)
         return unless File.exist? input
 
-        cmd = "magick #{input} -define quantum:format=floating-point \
+        cmd = "magick \"#{input}\" -define quantum:format=floating-point \
               -colorspace RGB -auto-gamma -evaluate Multiply 1.5 \
               -evaluate Pow 0.9 -colorspace sRGB -depth 16 \
-              -profile data/2020_profile.icc #{output}"
+              -profile data/2020_profile.icc \"#{output}\""
 
         system(cmd)
       end

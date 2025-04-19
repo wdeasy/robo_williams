@@ -8,8 +8,7 @@ module Bot
   @playing = nil
 
   def self.play_audio(event, url)
-    Bot.log "#{event.author.username}: #{event.content}"
-    event.message.delete unless event.message.channel.pm?
+    Bot.log_command(event)
     return unless @playing.nil? && event.user.voice_channel
 
     @playing = Bot.valid_url(url)

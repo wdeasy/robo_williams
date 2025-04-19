@@ -8,7 +8,7 @@ module Bot
     module Omg
       extend Discordrb::Commands::CommandContainer
       command(:omg, description: 'TAAAWRLK LIIIWRKEEEWR THIIIWRS!!!') do |event, *args|
-        Bot.response_message(event, args.map(&:upcase).join(' ').strip.hyperbolize.dramatize.stringosaur)
+        Bot.message_response(event, args.map(&:upcase).join(' ').strip.hyperbolize.dramatize.stringosaur)
       end
     end
   end

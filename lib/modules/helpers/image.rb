@@ -6,13 +6,13 @@ require 'securerandom'
 # Image helpers
 module Bot
   def self.process_image(event)
-    rnd     = SecureRandom.hex(3)
-    input   = "data/images/input_#{rnd}.png"
-    output  = "data/images/output_#{rnd}.png"
+    random  = SecureRandom.hex(3)
+    input   = "data/images/input_#{random}.png"
+    output  = "data/images/output_#{random}.png"
 
     Bot.save_image(event, input)
     Bot.alter_image(input, output, event)
-    Bot.response_file(event, output)
+    Bot.file_response(event, output)
     Bot.cleanup_images(input, output)
 
     nil

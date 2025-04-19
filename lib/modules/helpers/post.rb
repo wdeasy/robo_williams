@@ -2,24 +2,6 @@
 
 # Post helpers
 module Bot
-  def self.response_message(event, msg)
-    Bot.log "#{event.author.username}: #{event.content}"
-    event.message.delete unless event.message.channel.pm?
-    event.channel.split_send(msg)
-  rescue StandardError => e
-    Bot.log "Error with the #{event.command.name} command."
-    Bot.log_exception(e)
-  end
-
-  def self.response_file(event, file)
-    Bot.log "#{event.author.username}: #{event.content}"
-    event.message.delete unless event.message.channel.pm?
-    event.send_file(File.open(file, 'r')) if File.exist? file
-  rescue StandardError => e
-    Bot.log "Error with the #{event.command.name} command."
-    Bot.log_exception(e)
-  end
-
   def self.post_message(msg)
     Bot.log "Posting #{msg}"
     BOT.channel(CONFIG[:channel]).split_send(msg)

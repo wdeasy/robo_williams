@@ -22,7 +22,7 @@ module Bot
       }
 
       command(:wildo, description: '✝️️ 🇾 🅿️️ 📧   🇱 ℹ️️ 🇰 📧   ✝️️ 🇭 ℹ️️ 🇸') do |event, *args|
-        Bot.response_message(event, Bot.build_words(@emojis, args))
+        Bot.message_response(event, Bot.build_words(@emojis, args))
       end
     end
   end

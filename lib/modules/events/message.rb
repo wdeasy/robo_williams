@@ -13,7 +13,7 @@ module Bot
         matches = Message.matches(event.content)
         return if matches.empty?
 
-        Bot.log "#{event.author.username}: #{event.content}"
+        Bot.log_message(event)
 
         match = Message.pick_match(matches)
         Message.reply(event, match)

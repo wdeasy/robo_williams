@@ -5,11 +5,15 @@ require 'time'
 # Log helpers
 module Bot
   def self.log_command(event)
-    Bot.log "#{event.author.username}: #{event.content}"
+    Bot.log_message(event)
     event.message.delete unless event.message.channel.pm?
   rescue StandardError => e
     Bot.log 'Error while logging command.'
     Bot.log_exception(e)
+  end
+
+  def self.log_message(event)
+    Bot.log "#{event.author.username}: #{event.content}"
   end
 
   def self.log(message)

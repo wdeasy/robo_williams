@@ -2,7 +2,7 @@
 
 # Response helpers
 module Bot
-  def self.log_response(event)
+  def self.log_command(event)
     Bot.log "#{event.author.username}: #{event.content}"
     event.message.delete unless event.message.channel.pm?
   rescue StandardError => e
@@ -11,7 +11,7 @@ module Bot
   end
 
   def self.message_response(event, msg)
-    Bot.log_response(event)
+    Bot.log_command(event)
     event.channel.split_send(msg)
   rescue StandardError => e
     Bot.log "Error with the #{event.command.name} command."
@@ -19,7 +19,7 @@ module Bot
   end
 
   def self.file_response(event, file)
-    Bot.log_response(event)
+    Bot.log_command(event)
     event.send_file(File.open(file, 'r')) if File.exist? file
   rescue StandardError => e
     Bot.log "Error with the #{event.command.name} command."
